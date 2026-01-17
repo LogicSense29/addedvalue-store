@@ -30,9 +30,9 @@ export default function ModernHome() {
     const [heroIndex, setHeroIndex] = useState(0);
 
     const heroImages = [
-        assets.hero_model_img,
-        assets.hero_product_img1,
-        assets.hero_product_img2
+        assets.tshirtshero,
+        assets.foodhero,
+        assets.smartwatch
     ];
 
     const ProductSection = ({ title, subtitle, badge, products, link = "/shop", isScrollable = false }) => (
@@ -238,7 +238,7 @@ export default function ModernHome() {
                                 </Link>
                             </div>
                             <div className="absolute bottom-0 right-0 w-40 h-40 translate-x-10 translate-y-10 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-500">
-                                <Image src={assets.hero_product_img2} alt="Product" fill className="object-contain" />
+                                <Image src={assets.smartwatch} alt="Product" fill className="object-contain" />
                             </div>
                         </div>
                     </div>

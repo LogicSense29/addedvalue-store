@@ -37,7 +37,7 @@ export default function LoginPage() {
             Welcome to AddedValue Store
           </h1>
             <p className='mt-2 text-sm text-gray-600'>
-            {step == 'OTP' ? 'Check Email for OTP' : 'Use your email to log in or sign up.'}
+            {step == 'OTP' ? <span>Check <span className='font-bold'>{email}</span> for OTP</span> : 'Use your email to log in or sign up.'}
           </p>
         </div>
 
@@ -180,7 +180,7 @@ function PasswordInput({ callbackUrl }) {
       <button
         type='button'
         disabled={loading}
-        className='w-full rounded-md bg-primary py-3 text-white font-semibold hover:bg-orange-600 transition'
+        className='w-full rounded-md bg-primary py-3 text-white font-semibold hover:bg-orange-600 transition flex justify-center'
         onClick={handleLogin}>
         {loading ? (
           <Loader2 className='h-5 w-5 animate-spin text-white' />

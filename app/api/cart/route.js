@@ -26,8 +26,10 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+  const startTime = Date.now();
   try {
     const { userId, cart } = await req.json();
+    console.log(`[CART_POST] Starting sync for user: ${userId}`);
 
     if (!userId) {
       return Response.json({ error: "User ID is required" }, { status: 400 });
@@ -39,6 +41,7 @@ export async function POST(req) {
       select: { cart: true },
     });
 
+    console.log(`[CART_POST] Completed sync for user: ${userId} in ${Date.now() - startTime}ms`);
     return Response.json({ success: true, cart: updatedUser.cart });
   } catch (error) {
     console.error("POST_CART_ERROR", error);

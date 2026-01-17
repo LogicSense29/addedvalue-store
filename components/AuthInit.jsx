@@ -12,26 +12,25 @@ export default function AuthInit({ children }) {
   const cartItems = useSelector(state => state.cart.cartItems);
   const user = useSelector(state => state.user.currentUser);
 
-  // Sync cart to DB when it changes
+  // Sync cart to DB when it changes (debounced)
   useEffect(() => {
-    const syncCart = async () => {
-      if (user && Object.keys(cartItems).length >= 0) {
-        try {
-          await fetch("/api/cart", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user.id, cart: cartItems }),
-          });
-        } catch (error) {
-          console.error("Cart sync failed:", error);
-        }
+    if (!user) return;
+
+    // Debounce cart sync to prevent excessive API calls
+    const timeoutId = setTimeout(async () => {
+      try {
+        await fetch("/api/cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: user.id, cart: cartItems }),
+        });
+      } catch (error) {
+        console.error("Cart sync failed:", error);
       }
-    };
-    
-    // Only sync if user is logged in
-    if (user) {
-      syncCart();
-    }
+    }, 2000); // Wait 2 seconds after last cart change
+
+    // Cleanup timeout on unmount or when dependencies change
+    return () => clearTimeout(timeoutId);
   }, [cartItems, user]);
 
   useEffect(() => {

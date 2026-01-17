@@ -120,7 +120,7 @@ const Navbar = () => {
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                     className='flex items-center gap-2 text-slate-600 hover:text-indigo-500 transition-colors'
                                 >
-                                    <div className="size-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-semibold border border-indigo-200">
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-sm sm:text-base font-bold border border-indigo-200 shadow-sm">
                                         {user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase()}
                                     </div>
                                     <span className="hidden lg:block max-w-[100px] truncate font-medium">{user.name || 'User'}</span>

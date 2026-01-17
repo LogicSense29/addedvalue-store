@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { assets, categories } from '@/assets/assets';
-import { ShoppingBag, User, Search, Menu, X, ArrowRight, ChevronDown, Package, Mail, Heart, Ticket, LogOut, Store } from 'lucide-react';
+import { ShoppingBag, User, Search, Menu, X, ArrowRight, ChevronDown, Package, Mail, Heart, Ticket, LogOut, Store, UserCircle2 } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogoModern } from '@/components/Logo2';
 import { useRouter } from 'next/navigation';
@@ -62,7 +62,7 @@ export default function ModernLayout({ children }) {
             <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 py-4 ${
                 isScrolled ? 'top-2' : 'top-0'
             }`}>
-                <div className={`max-w-7xl mx-auto flex items-center justify-between px-0 py-3 border-none rounded-2xl transition-all duration-500 relative ${
+                <div className={`max-w-7xl mx-auto flex items-center justify-between px-0 py-0 border-none rounded-2xl transition-all duration-500 relative ${
                     isScrolled 
                     ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/20 px-4 lg:px-6' 
                     : 'bg-transparent'
@@ -133,8 +133,10 @@ export default function ModernLayout({ children }) {
                         {/* Profile Dropdown */}
                         <div className="relative">
                             {!user ? (
-                                <Link href="/auth" className="p-2 hover:bg-black/5 rounded-full transition-colors" title="Account">
+                                <Link href="/auth" className="p-2 hover:bg-black/5 rounded-full transition-colors mr-4 md:mr-2" title="Account">
                                     <User size={20} strokeWidth={1.5} />
+                                    {/* <CircleUserRound /> */}
+
                                 </Link>
                             ) : (
                                 <>
@@ -179,7 +181,7 @@ export default function ModernLayout({ children }) {
                                                 onClick={handleLogout}
                                                 className="w-full flex items-center gap-4 px-6 py-3 text-[10px] uppercase tracking-widest font-bold text-red-500 hover:bg-red-50 rounded-xl transition-all"
                                             >
-                                                <LogOut size={14} /> Close Session
+                                                <LogOut size={14} /> Logout
                                             </button>
                                         </div>
                                     </div>
