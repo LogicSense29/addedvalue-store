@@ -3,6 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
+    // Check if Stripe is properly configured
+    if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY === 'sk_test_placeholder') {
+      return NextResponse.json({ 
+        error: "Stripe payment is not configured. Please contact support or use Cash on Delivery." 
+      }, { status: 503 });
+    }
+
     const { orderIds, items, currency } = await req.json();
 
     if (!orderIds || !items || items.length === 0) {
