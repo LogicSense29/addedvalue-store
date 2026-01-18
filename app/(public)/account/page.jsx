@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { User, MapPin, Package, Settings, Camera, Plus, Trash2, CheckCircle2, Loader2, Lock, ShieldAlert, LogOut, Mail, Heart, Ticket, Store } from 'lucide-react'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ import ProfileForm from './_components/ProfileForm'
 import AddressList from './_components/AddressList'
 import SecuritySettings from './_components/SecuritySettings'
 
-const AccountPage = () => {
+const AccountPageContent = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -132,4 +132,15 @@ const AccountPage = () => {
     )
 }
 
-export default AccountPage
+export default function AccountPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+                <Loader2 className="animate-spin text-primary" size={40} />
+                <p className="text-slate-500 font-medium tracking-wide">Loading your account...</p>
+            </div>
+        }>
+            <AccountPageContent />
+        </Suspense>
+    );
+}

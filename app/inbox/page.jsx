@@ -1,10 +1,10 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Search, Send, User, Store, ShieldCheck, MoreVertical, Paperclip, Smile, ArrowLeft, MessageSquare, Clock, Filter, Loader2 } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux' // Assuming redux is used for user data, or we fetch it.
 
-const InboxPage = () => {
+const InboxPageContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [activeChat, setActiveChat] = useState(null); // Whole chat object
@@ -351,4 +351,14 @@ const InboxPage = () => {
     )
 }
 
-export default InboxPage
+export default function InboxPage() {
+    return (
+        <Suspense fallback={
+            <div className="h-[calc(100vh-80px)] flex items-center justify-center bg-white">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        }>
+            <InboxPageContent />
+        </Suspense>
+    );
+}

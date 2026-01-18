@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { assets } from "@/assets/assets";
 import Logo from "@/components/Logo";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function LoginPage() {
+function LoginPageContent() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
@@ -64,6 +64,18 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className='min-h-screen flex items-center justify-center bg-white'>
+        <Loader2 className='h-8 w-8 animate-spin text-primary' />
+      </div>
+    }>
+      <LoginPageContent />
+    </Suspense>
   );
 }
 

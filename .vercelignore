@@ -1,0 +1,6 @@
+smtp-diagnostics.js
+test-email.js
+email_debug.log
+diag_results.txt
+build-log.txt
+*.log
